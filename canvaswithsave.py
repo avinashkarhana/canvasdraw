@@ -4,13 +4,18 @@ xold, yold = None, None
 
 def main():
     root = Tk()
+    root.title("Canvas Draw")
     drawing_area = Canvas(root,width=600,height=600)
     drawing_area.pack()
     drawing_area.bind("<Motion>", motion)
     drawing_area.bind("<ButtonPress-1>", b1down)
     drawing_area.bind("<ButtonRelease-1>", b1up)
     button4=Button(root,fg="green",text="Save",command=lambda:getter(drawing_area))
-    button4.pack(side=BOTTOM)
+    button4.pack(side=RIGHT)
+    button4=Button(root,fg="green",text="Clear",command=lambda:delete(drawing_area))
+    button4.pack(side=LEFT)
+    def delete(widget):
+        widget.delete("all")
     def getter(widget):
         from PIL import ImageGrab
         x=root.winfo_rootx()+widget.winfo_x()
